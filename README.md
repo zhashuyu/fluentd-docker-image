@@ -1,3 +1,5 @@
+# 本代码为kubernetes官方克隆
+
 # Collecting Docker Log Files with Fluentd and Elasticsearch
 This directory contains the source files needed to make a Docker image
 that collects Docker container log files using [Fluentd][fluentd]
