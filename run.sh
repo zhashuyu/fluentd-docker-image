@@ -1,3 +1,5 @@
+#!/bin/sh
+
 # Copyright 2017 The Kubernetes Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,14 +14,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-.PHONY:	build push
+# These steps must be executed once the host /var and /lib volumes have
+# been mounted, and therefore cannot be done in the docker build stage.
 
-PREFIX = staging-k8s.gcr.io
-IMAGE = fluentd-elasticsearch
-TAG = v2.3.1
+# For systems without journald
+mkdir -p /var/log/journal
 
-build:
-	docker build --pull -t $(PREFIX)/$(IMAGE):$(TAG) .
-
-push:
-	docker push $(PREFIX)/$(IMAGE):$(TAG)
+exec /usr/local/bin/fluentd $FLUENTD_ARGS
